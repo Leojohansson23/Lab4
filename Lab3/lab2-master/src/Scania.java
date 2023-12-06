@@ -1,54 +1,31 @@
 import java.awt.*;
 
-public class Scania extends Truck implements Tilting{
+public class Scania extends Truck  {
 
-    private int angle = 0;
-    private  int maxAngle = 70;
-
-    private int minAngle = 0;
     public Scania(){
         super(2,300,Color.pink, "src.Scania");
         stopEngine();
-        setCanMove(true);
-
+        move.setCanMove(true);
     }
 
+    ScaniaCarrier scaniacarrier = new ScaniaCarrier();
 
-    public int getangle(){
-        return angle;
 
-    }
-    public void setangle(int degree){
-        angle = degree;
-
-    }
-    @Override
-    public void carrierHigher() {
-        if(getCurrentSpeed() == 0) {
-            if ((getangle() + 10) <= maxAngle) {
-                setangle(getangle() + 10);
-            }
-            else {setangle(maxAngle);
-
-            }
+    // Fråga TA om detta är nödvändigt eller en bra idé !
+    public void CarrierHigher() {
+        if (move.getCurrentSpeed() == 0) {
+            this.scaniacarrier.carrierHigher();
         }
     }
-
-    @Override
-    public void carrierLower() {
-        if(getCurrentSpeed() == 0) {
-            if ((getangle() - 10) > minAngle) {
-                setangle(getangle() - 10);
-            }
-            else {setangle(minAngle);
-            }
-
+    public void CarrierLower(){
+        if(move.getCurrentSpeed() == 0) {
+            this.scaniacarrier.carrierLower();
         }
     }
 
     @Override
     public boolean getCanMove(){
-        if (angle > minAngle){
+        if (scaniacarrier.getangle() > scaniacarrier.getMinAngle()){
             return false;
         }
         return true;

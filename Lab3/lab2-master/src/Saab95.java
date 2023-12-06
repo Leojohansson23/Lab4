@@ -8,7 +8,7 @@ public class Saab95 extends Car{
         super(2, 100, Color.red, "src.Saab95");
         turboOn = false;
         stopEngine();
-        setCanMove(true);
+        move.setCanMove(true);
 
     }
 

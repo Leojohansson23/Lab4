@@ -6,5 +6,6 @@ public abstract class Truck extends Car{
         super(2,275,Color.cyan, "src.truck");
     }
 
+    public abstract boolean getCanMove();
 }
 

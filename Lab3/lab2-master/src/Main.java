@@ -16,16 +16,15 @@ public class  Main {
 
                 Workshop<Saab95> saab95Workshop = new Workshop<>();
                 saab95Workshop.addcar(saab1);
-
-                cartransport1.carrierLower();
-                cartt1.carrierLower();
-                cartransport1.addcar(saab1);
                 cartransport1.addcar(saab2);
                 cartransport1.addcar(saab1);
                 cartt1.addcar(saab1);
 
                 System.out.println(cartransport1.getRamparraylist());
                 System.out.println(cartt1.getRamparraylist());
+
+
+
 
 
 

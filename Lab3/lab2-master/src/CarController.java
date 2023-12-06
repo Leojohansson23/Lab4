@@ -52,29 +52,29 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
-                car.move();
-                int x = (int) Math.round(car.getXpos());
-                int y = (int) Math.round(car.getYpos());
+                car.move.move();
+                int x = (int) Math.round(car.move.getXpos());
+                int y = (int) Math.round(car.move.getYpos());
                 if (y < 0 || y > 500) {
-                    double currspeed = car.getCurrentSpeed();
-                    while (car.getCurrentSpeed() > 0) {
+                    double currspeed = car.move.getCurrentSpeed();
+                    while (car.move.getCurrentSpeed() > 0) {
                         car.brake(1);
                     }
 
-                    car.setDirection(car.getDirection() + 180);
-                    while (car.getCurrentSpeed() < currspeed){
+                    car.move.setDirection(car.move.getDirection() + 180);
+                    while (car.move.getCurrentSpeed() < currspeed){
                         car.gas(1);
 
                     }
                 }
                 if (x > 700 || x < 0) {
-                    double currspeed = car.getCurrentSpeed();
-                    while (car.getCurrentSpeed() > 0) {
+                    double currspeed = car.move.getCurrentSpeed();
+                    while (car.move.getCurrentSpeed() > 0) {
                         car.brake(1);
                     }
 
-                    car.setDirection(car.getDirection() + 180);
-                    while (car.getCurrentSpeed() < currspeed){
+                    car.move.setDirection(car.move.getDirection() + 180);
+                    while (car.move.getCurrentSpeed() < currspeed){
                         car.gas(1);
                     }
                 }
@@ -122,7 +122,7 @@ public class CarController {
         for (Car car: cars) {
             if(car instanceof Scania)
             {
-                ((Scania) car).carrierLower();
+                ((Scania) car).CarrierLower();
             }
         }
     }
@@ -132,7 +132,7 @@ public class CarController {
         for (Car car: cars) {
             if(car instanceof Scania)
             {
-                ((Scania) car).carrierHigher();
+                ((Scania) car).CarrierHigher();
             }
         }
 
@@ -141,7 +141,7 @@ public class CarController {
 
     void stopAllCars(){
         for (Car car: cars){
-            while (car.getCurrentSpeed() > 0){
+            while (car.move.getCurrentSpeed() > 0){
                 car.brake(1);
             }
         }
@@ -149,7 +149,7 @@ public class CarController {
 
     void startAllCars(){
         for (Car car: cars){
-            while (car.getCurrentSpeed() < 0.1){
+            while (car.move.getCurrentSpeed() < 0.1){
                 car.gas(0.5);
             }
         }

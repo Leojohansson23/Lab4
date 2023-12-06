@@ -1,27 +1,29 @@
+
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Cartransport extends Truck implements Tilting{
+public class Cartransport extends Truck {
 
+    Cartransportcarrier Cartransportcarrier = new Cartransportcarrier();
 
-     private ArrayList<Car> ramparraylist = new ArrayList<>();
+    private ArrayList<Car> ramparraylist = new ArrayList<>();
 
     public ArrayList<Car> getRamparraylist() {
         return ramparraylist;
     }
-    private boolean carrierPos;
+
 
 
     public Cartransport(){
         super(2,250,Color.gray, "src.Cartransport");
         stopEngine();
-        setCanMove(true);
+        move.setCanMove(true);
 
 
     }
-    @Override
+
     public boolean getCanMove() {
-        if (carrierPos){
+        if (Cartransportcarrier.getCarrierpos()){
             return false;
         }
         return true;
@@ -29,16 +31,16 @@ public class Cartransport extends Truck implements Tilting{
 
 
     public void addcar(Car smallcar) {
-        if (smallcar.isOnTruck() == false) {
-            if (Math.abs(smallcar.getXpos() - this.getXpos()) <= 0.5 && Math.abs(smallcar.getYpos() - this.getYpos()) <= 0.5)
-                if (carrierPos && ramparraylist.size() <= 8) {
-                    smallcar.setXpos(this.getXpos());
-                    smallcar.setYpos(this.getYpos());
+        if (isOnTruck() == false) {
+            if (Math.abs(smallcar.move.getXpos() - this.move.getXpos()) <= 0.5 && Math.abs(this.move.getYpos() - this.move.getYpos()) <= 0.5)
+                if (Cartransportcarrier.getCarrierpos() && ramparraylist.size() <= 8) {
+                    smallcar.move.setXpos(this.move.getXpos());
+                    smallcar.move.setYpos(this.move.getYpos());
                     if (smallcar instanceof Truck) {
 
                     } else {
                         ramparraylist.add(smallcar);
-                        smallcar.setOnTruck(true);
+                        setOnTruck(true);
                     }
                 }
         }
@@ -49,38 +51,28 @@ public class Cartransport extends Truck implements Tilting{
     }
 
     public void removecar(){
-        if (carrierPos){
-            ramparraylist.get(ramparraylist.size() - 1).setXpos(this.getXpos() + 0.2);
-            ramparraylist.get(ramparraylist.size() - 1).setYpos(this.getYpos() + 0.2);
+        if (Cartransportcarrier.getCarrierpos()){
+            ramparraylist.get(ramparraylist.size() - 1).move.setXpos(this.move.getXpos() + 0.2);
+            ramparraylist.get(ramparraylist.size() - 1).move.setYpos(this.move.getYpos() + 0.2);
 
             ramparraylist.get(ramparraylist.size()-1).setOnTruck(false);
             ramparraylist.remove(ramparraylist.size() - 1);
         }
-
-
-
     }
 
 
-    @Override
-    public void carrierHigher() {
-        carrierPos = false;
-    }
-
-    @Override
-    public void carrierLower() {
-        carrierPos = true;
-    }
 
 
-    @Override
+
+
     public void move() {
-
-        super.move();
-        for(Moveable car : ramparraylist){
-                car.move();
+        move.move();
+        for(Car car : ramparraylist){
+                car.move.move();
         }
     }
+
+
 }
 
 

@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame{
+public class Carviewreactstobuttons extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
 
@@ -40,7 +40,7 @@ public class CarView extends JFrame{
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc){
+    public Carviewreactstobuttons(String framename, CarController cc){
         this.carC = cc;
         initComponents(framename);
     }

@@ -17,7 +17,6 @@ public class Cartransport extends Truck {
     public Cartransport(){
         super(2,250,Color.gray, "src.Cartransport");
         stopEngine();
-        move.setCanMove(true);
 
 
     }

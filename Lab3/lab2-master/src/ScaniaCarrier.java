@@ -6,6 +6,12 @@ public class ScaniaCarrier implements Tilting {
 
     private int minAngle = 0;
 
+    private boolean canMove;
+
+    public boolean getCanMove(){return canMove;}
+
+    public boolean setCanMove(boolean can){return this.canMove = can;}
+
 
     public int getangle(){
         return angle;
@@ -21,21 +27,28 @@ public class ScaniaCarrier implements Tilting {
     }
 
     public void carrierHigher() {
+            setCanMove(false);
             if ((getangle() + 10) <= maxAngle) {
                 setangle(getangle() + 10);
+
             }
             else {setangle(maxAngle);
 
             }
+
     }
 
     public void carrierLower() {
+            setCanMove(true);
             if ((getangle() - 10) > minAngle) {
                 setangle(getangle() - 10);
 
             }
-            else {setangle(minAngle);
+            else {
+                setangle(minAngle);
+                setCanMove(true);
             }
+
 
         }
 }

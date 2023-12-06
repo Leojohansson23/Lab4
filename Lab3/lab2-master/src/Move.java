@@ -1,6 +1,6 @@
 public class Move implements Moveable{
     private int Direction = 0;
-    private boolean canMove;
+
     private double Xpos = 0;
     private double Ypos = 0;
     public double getXpos(){return Xpos;}
@@ -14,9 +14,7 @@ public class Move implements Moveable{
     public int setDirection(int direction) {return this.Direction = direction;}
 
 
-    public boolean getCanMove(){return canMove;}
 
-    public boolean setCanMove(boolean can){return this.canMove = can;}
 
     public double getCurrentSpeed(){
         return currentSpeed;
@@ -25,7 +23,7 @@ public class Move implements Moveable{
 
     @Override
         public void move() {
-        if (getCanMove()) {
+        //if (getCanMove()) {
             int value = (Direction % 360);
             value = value / 90;
             switch (value) {
@@ -42,7 +40,7 @@ public class Move implements Moveable{
                     Ypos -= getCurrentSpeed();
                     break;
             }
-        }
+        //}
     }
 
 

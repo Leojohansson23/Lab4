@@ -6,7 +6,7 @@ public class Volvo240 extends Car{
         super(4,125, Color.black, "src.Volvo240");
         stopEngine();
         setTrimFactor(1.25);
-        move.setCanMove(true);
+
     }
 
     @Override

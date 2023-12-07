@@ -6,12 +6,6 @@ public class Cartransportcarrier implements Tilting {
         return carrierPos;
     }
 
-    private boolean canMove;
-
-    public boolean getCanMove(){return canMove;}
-
-    public boolean setCanMove(boolean can){return this.canMove = can;}
-
     @Override
     public void carrierHigher() {
             carrierPos = false;

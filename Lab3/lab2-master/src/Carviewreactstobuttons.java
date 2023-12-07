@@ -14,12 +14,20 @@ import java.awt.event.ActionListener;
  **/
 
 public class Carviewreactstobuttons extends JFrame{
-    private static final int X = 800;
-    private static final int Y = 800;
 
-    // The controller member
+    //private static final int X = 800;
+    //private static final int Y = 800;
+
+    Carviewmakebuttons Buttons = new Carviewmakebuttons();
     CarController carC;
 
+    public Carviewreactstobuttons(String s) {
+        Buttons.initComponents(s);
+    }
+
+        // The controller member
+
+    /*
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel controlPanel = new JPanel();
@@ -38,6 +46,8 @@ public class Carviewreactstobuttons extends JFrame{
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
+
+
 
     // Constructor
     public Carviewreactstobuttons(String framename, CarController cc){
@@ -69,6 +79,7 @@ public class Carviewreactstobuttons extends JFrame{
             }
         });
 
+
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
@@ -76,6 +87,8 @@ public class Carviewreactstobuttons extends JFrame{
         this.add(gasPanel);
 
         controlPanel.setLayout(new GridLayout(2,4));
+
+
 
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
@@ -99,44 +112,49 @@ public class Carviewreactstobuttons extends JFrame{
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
+         */
+
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
-        gasButton.addActionListener(new ActionListener() {
+
+
+    {
+        Buttons.gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+                carC.gas(Buttons.gasAmount);
             }
         });
 
-        brakeButton.addActionListener(new ActionListener() {
+        Buttons.brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.brake(gasAmount);
+                carC.brake(Buttons.gasAmount);
             }
         });
 
 
-        turboOnButton.addActionListener(new ActionListener() {
+        Buttons.turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.turboON();
             }
         });
-        turboOffButton.addActionListener(new ActionListener() {
+        Buttons.turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.turboOff();
 
             }
         });
-        liftBedButton.addActionListener(new ActionListener() {
+        Buttons.liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.higherBed();
 
             }
         });
-        lowerBedButton.addActionListener(new ActionListener() {
+        Buttons.lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.lowerBed();
@@ -144,20 +162,20 @@ public class Carviewreactstobuttons extends JFrame{
             }
         });
 
-        startButton.addActionListener(new ActionListener() {
+        Buttons.startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.startAllCars();
             }
         });
 
-        stopButton.addActionListener(new ActionListener() {
+
+        Buttons.stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.stopAllCars();
             }
         });
-
 
 
         // Make the frame pack all it's components by respecting the sizes if possible.
@@ -166,10 +184,12 @@ public class Carviewreactstobuttons extends JFrame{
         // Get the computer screen resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         // Center the frame
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         // Make the frame visible
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
+
 }

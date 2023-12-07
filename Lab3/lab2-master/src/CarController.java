@@ -42,7 +42,7 @@ public class CarController {
         //Saab95CarController.timer.start();
 
         // Start a new view and send a reference of self
-        cc.frame = new Carviewreactstobuttons("CarSim 1.0", cc);
+        cc.frame = new Carviewreactstobuttons("CarSim 1.0");
 
         // Start the timer
         cc.timer.start();
@@ -54,9 +54,16 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
-                if (car instanceof Truck)
-                    if (((Truck) car).scaniacarrier.getCanMove())
+                if (car instanceof Scania)
+                    if (((Scania) car).scaniacarrier.getCanMove())
                         car.move.move();
+                else if (car instanceof Cartransport) {
+                    if (((Cartransport) car).Cartransportcarrier.getCarrierpos()) {
+                        car.move.move();
+                    }
+                } else {
+                    car.move.move();
+                    }
 
                 System.out.println(car.move.getCurrentSpeed());
 
@@ -86,9 +93,9 @@ public class CarController {
                     }
                 }
 
-                frame.drawPanel.moveit(cars.indexOf(car),x, y);
+                frame.Buttons.drawPanel.moveit(cars.indexOf(car),x, y);
                 // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
+                frame.Buttons.drawPanel.repaint();
             }
 
         }
@@ -102,9 +109,14 @@ public class CarController {
                 if (((Scania) car).scaniacarrier.getCanMove()) {
                     car.gas(gas);
                 }
-
             }
-
+            else if (car instanceof Cartransport) {
+                if (((Cartransport) car).Cartransportcarrier.getCarrierpos()) {
+                    car.gas(gas);
+                }
+            } else {
+                car.gas(gas);
+            }
 
         }
     }

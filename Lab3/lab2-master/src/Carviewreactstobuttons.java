@@ -15,8 +15,8 @@ import java.awt.event.ActionListener;
 
 public class Carviewreactstobuttons extends JFrame{
 
-    //private static final int X = 800;
-    //private static final int Y = 800;
+    private static final int X = 800;
+    private static final int Y = 800;
 
     Carviewmakebuttons Buttons = new Carviewmakebuttons();
     CarController carC;

@@ -1,4 +1,12 @@
-public class Move implements Moveable{
+import java.util.Observable;
+
+public class Move implements Moveable {
+
+    /*private void updateObservers() {
+        Observable.setChanged(true);
+        Observable.notifyObservers(getXpos(), getYpos());
+
+    }*/
     private int Direction = 0;
 
     private double Xpos = 0;
@@ -39,7 +47,10 @@ public class Move implements Moveable{
                 case 3:
                     Ypos -= getCurrentSpeed();
                     break;
+
             }
+
+            //updateObservers();
         //}
     }
 

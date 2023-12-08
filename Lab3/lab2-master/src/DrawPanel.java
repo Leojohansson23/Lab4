@@ -5,10 +5,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+public class DrawPanel extends JPanel  {
+
+
 
     // Just a single image, TODO: Generalize
     ArrayList<Image> Images = new ArrayList();
@@ -18,6 +22,42 @@ public class DrawPanel extends JPanel{
 
     ArrayList<Point> Points = new ArrayList<>();
 
+    void addVolvoImage() {
+        try {
+            Images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        Point pointx = new Point();
+        Points.add(pointx);
+    }
+
+    void addSaabImage() {
+        try {
+            Images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        Point pointx = new Point();
+        Points.add(pointx);
+
+    }
+
+    void addScaniaImage() {
+        try {
+            Images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
+
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        Point pointx = new Point();
+        Points.add(pointx);
+    }
+
+    void removeImage(){
+        Images.remove(Images.size()-1);
+        Points.remove(Points.size() - 1);
+    }
     Point point0 = new Point();
     Point point1 = new Point();
     Point point2 = new Point();
@@ -69,4 +109,5 @@ public class DrawPanel extends JPanel{
             yExtend += 100;
         }
     }
+
 }

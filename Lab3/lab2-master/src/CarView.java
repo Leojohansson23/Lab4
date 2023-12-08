@@ -4,6 +4,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -13,21 +15,31 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class Carviewreactstobuttons extends JFrame{
+public class CarView extends JFrame /*implements Observable*/ {
 
-    private static final int X = 800;
-    private static final int Y = 800;
+    /*@Override
+    public void update(Observable o, Object arg) {
+        if (o instanceof Move) {
+            Move move = (Move) o;
+            System.out.println("Hejsan");
+            updateView(move);
 
-    Carviewmakebuttons Buttons = new Carviewmakebuttons();
+        }
+    }*/
+
+    private void updateView(Move move) {
+        int carIndex = carC.cars.indexOf(move);
+        int x = (int) Math.round(move.getXpos());
+        int y = (int) Math.round(move.getYpos());
+        drawPanel.moveit(carIndex,x,y);
+        drawPanel.repaint();
+    }
+    private static final int X = 1200;
+    private static final int Y = 700;
+
+    // The controller member
     CarController carC;
 
-    public Carviewreactstobuttons(String s) {
-        Buttons.initComponents(s);
-    }
-
-        // The controller member
-
-    /*
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel controlPanel = new JPanel();
@@ -44,13 +56,18 @@ public class Carviewreactstobuttons extends JFrame{
     JButton liftBedButton = new JButton("Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
 
+    JButton AddVolvoButton = new JButton("Add Volvo");
+    JButton AddSaabButton = new JButton("Add Saab");
+
+    JButton AddScaniaButton = new JButton("Add Scania");
+
+    JButton RemoveCarButton = new JButton("Remove Car");
+
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
-
-
     // Constructor
-    public Carviewreactstobuttons(String framename, CarController cc){
+    public CarView(String framename, CarController cc){
         this.carC = cc;
         initComponents(framename);
     }
@@ -79,7 +96,6 @@ public class Carviewreactstobuttons extends JFrame{
             }
         });
 
-
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
@@ -88,14 +104,16 @@ public class Carviewreactstobuttons extends JFrame{
 
         controlPanel.setLayout(new GridLayout(2,4));
 
-
-
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(AddVolvoButton,6);
+        controlPanel.add(AddSaabButton,7);
+        controlPanel.add(AddScaniaButton,8);
+        controlPanel.add(RemoveCarButton,9);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -112,49 +130,75 @@ public class Carviewreactstobuttons extends JFrame{
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-         */
-
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
-
-
-    {
-        Buttons.gasButton.addActionListener(new ActionListener() {
+        gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(Buttons.gasAmount);
+                carC.gas(gasAmount);
             }
         });
 
-        Buttons.brakeButton.addActionListener(new ActionListener() {
+        brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.brake(Buttons.gasAmount);
+                carC.brake(gasAmount);
             }
         });
 
 
-        Buttons.turboOnButton.addActionListener(new ActionListener() {
+        turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.turboON();
             }
         });
-        Buttons.turboOffButton.addActionListener(new ActionListener() {
+        turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.turboOff();
 
             }
         });
-        Buttons.liftBedButton.addActionListener(new ActionListener() {
+
+        AddVolvoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.AddVolvo();
+            }
+        });
+
+        AddSaabButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.AddSaab();
+            }
+        });
+
+        AddScaniaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.AddScania();
+            }
+        });
+
+        RemoveCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.RemoveCar();
+            }
+        });
+
+
+
+        liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.higherBed();
 
             }
         });
-        Buttons.lowerBedButton.addActionListener(new ActionListener() {
+        lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.lowerBed();
@@ -162,20 +206,20 @@ public class Carviewreactstobuttons extends JFrame{
             }
         });
 
-        Buttons.startButton.addActionListener(new ActionListener() {
+        startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.startAllCars();
             }
         });
 
-
-        Buttons.stopButton.addActionListener(new ActionListener() {
+        stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.stopAllCars();
             }
         });
+
 
 
         // Make the frame pack all it's components by respecting the sizes if possible.
@@ -184,12 +228,13 @@ public class Carviewreactstobuttons extends JFrame{
         // Get the computer screen resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         // Center the frame
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         // Make the frame visible
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
+
 }
+

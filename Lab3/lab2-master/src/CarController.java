@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
  */
 
 public class CarController {
+
     //private T Car;
     // member fields:
 
@@ -20,20 +22,15 @@ public class CarController {
     private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    Carviewreactstobuttons frame;
+    CarView frame;
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
 
 
     public static void main(String[] args) {
 
-
-
         // Instance of this class
         CarController cc = new CarController();
-        
-        
-
         cc.cars.add(new Volvo240());
         cc.cars.add(new Saab95());
         cc.cars.add(new Scania());
@@ -42,7 +39,7 @@ public class CarController {
         //Saab95CarController.timer.start();
 
         // Start a new view and send a reference of self
-        cc.frame = new Carviewreactstobuttons("CarSim 1.0");
+        cc.frame = new CarView("CarSim 1.0",cc);
 
         // Start the timer
         cc.timer.start();
@@ -54,10 +51,10 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
-                if (car instanceof Scania)
+                if (car instanceof Scania) {
                     if (((Scania) car).scaniacarrier.getCanMove())
                         car.move.move();
-                else if (car instanceof Cartransport) {
+                } else if (car instanceof Cartransport) {
                     if (((Cartransport) car).Cartransportcarrier.getCarrierpos()) {
                         car.move.move();
                     }
@@ -65,37 +62,15 @@ public class CarController {
                     car.move.move();
                     }
 
-                System.out.println(car.move.getCurrentSpeed());
 
                 int x = (int) Math.round(car.move.getXpos());
                 int y = (int) Math.round(car.move.getYpos());
-                if (y < 0 || y > 500) {
-                    double currspeed = car.move.getCurrentSpeed();
-                    while (car.move.getCurrentSpeed() > 0) {
-                        car.brake(1);
-                    }
 
-                    car.move.setDirection(car.move.getDirection() + 180);
-                    while (car.move.getCurrentSpeed() < currspeed){
-                        car.gas(1);
+                car.keepInFrame();
 
-                    }
-                }
-                if (x > 700 || x < 0) {
-                    double currspeed = car.move.getCurrentSpeed();
-                    while (car.move.getCurrentSpeed() > 0) {
-                        car.brake(1);
-                    }
-
-                    car.move.setDirection(car.move.getDirection() + 180);
-                    while (car.move.getCurrentSpeed() < currspeed){
-                        car.gas(1);
-                    }
-                }
-
-                frame.Buttons.drawPanel.moveit(cars.indexOf(car),x, y);
+                frame.drawPanel.moveit(cars.indexOf(car),x, y);
                 // repaint() calls the paintComponent method of the panel
-                frame.Buttons.drawPanel.repaint();
+                frame.drawPanel.repaint();
             }
 
         }
@@ -129,11 +104,11 @@ public class CarController {
         }
     }
 
-
     void turboON(){
         for (Car car: cars) {
             if(car instanceof Saab95) {
                 ((Saab95) car).setTurboOn();
+
             }
         }
     }
@@ -144,6 +119,45 @@ public class CarController {
             }
         }
     }
+
+    void AddVolvo(){
+        if(cars.size() < 10){
+            Volvo240 volvo = new Volvo240();
+            cars.add(volvo);
+            frame.drawPanel.addVolvoImage();
+            //volvo.addObserver(frame);
+        }
+    }
+
+    void AddSaab(){
+        if(cars.size() < 10){
+            Saab95 saab = new Saab95();
+            cars.add(new Saab95());
+            frame.drawPanel.addSaabImage();
+            //saab.addObserver(frame);
+        }
+    }
+
+    void AddScania(){
+        if(cars.size() < 10){
+            Scania scania = new Scania();
+            cars.add(new Scania());
+            frame.drawPanel.addScaniaImage();
+            //scania.addObserver(frame);
+        }
+    }
+
+
+    void RemoveCar(){
+        if (cars.size() > 0) {
+            frame.drawPanel.removeImage();
+            cars.remove(cars.size()-1);
+
+        }
+
+    }
+
+
     void lowerBed(){
         for (Car car: cars) {
             if(car instanceof Scania)
@@ -174,18 +188,30 @@ public class CarController {
         }
     }
 
-    void startAllCars(){
-        for (Car car: cars) {
+    void startAllCars() {
+        for (Car car : cars) {
             if (car instanceof Scania) {
                 if (((Scania) car).scaniacarrier.getCanMove()) {
                     while (car.move.getCurrentSpeed() < 0.1) {
                         car.gas(0.5);
                     }
                 }
+            } else if (car instanceof Cartransport) {
+                if (((Cartransport) car).Cartransportcarrier.getCarrierpos()) {
+                    while (car.move.getCurrentSpeed() < 0.1) {
+                        car.gas(0.5);
+
+                    }
+                }
+            } else {
+                while (car.move.getCurrentSpeed() < 0.1) {
+                    car.gas(0.5);
+                }
             }
         }
     }
-
-
-
 }
+
+
+
+

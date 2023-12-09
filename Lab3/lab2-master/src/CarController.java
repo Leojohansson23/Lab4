@@ -64,6 +64,8 @@ public class CarController {
                     car.move.move();
                     }
 
+                car.keepInFrame();
+
             }
             frame.updateview();
         }
@@ -115,18 +117,16 @@ public class CarController {
 
     void AddVolvo(){
         if(cars.size() < 10){
-            fact.addVolvo();
-            //Volvo240 volvo = new Volvo240();
-            //cars.add(volvo);
-            //frame.drawPanel.addVolvoImage();
+            fact.addVolvo(cars);
+            frame.drawPanel.addVolvoImage();
+
             //volvo.addObserver(frame);
         }
     }
 
     void AddSaab(){
         if(cars.size() < 10){
-            Saab95 saab = new Saab95();
-            cars.add(new Saab95());
+            fact.addSaab(cars);
             frame.drawPanel.addSaabImage();
             //saab.addObserver(frame);
         }
@@ -134,8 +134,7 @@ public class CarController {
 
     void AddScania(){
         if(cars.size() < 10){
-            Scania scania = new Scania();
-            cars.add(new Scania());
+            fact.addScania(cars);
             frame.drawPanel.addScaniaImage();
             //scania.addObserver(frame);
         }

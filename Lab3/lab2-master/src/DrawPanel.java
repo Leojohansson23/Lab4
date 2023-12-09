@@ -10,9 +10,12 @@ import java.util.Observer;
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel  {
+public class DrawPanel extends JPanel /*implements Observer*/ {
 
-
+    /*@Override
+    public void update(Observable o, Object arg) {
+        System.out.print("Går in i drawpanel");
+    }*/
 
     // Just a single image, TODO: Generalize
     ArrayList<Image> Images = new ArrayList();
@@ -109,5 +112,6 @@ public class DrawPanel extends JPanel  {
             yExtend += 60;
         }
     }
+
 
 }

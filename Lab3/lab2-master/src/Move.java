@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Observable;
+import java.util.List;
 
 public class Move implements Moveable {
 
@@ -7,6 +9,22 @@ public class Move implements Moveable {
         Observable.notifyObservers(getXpos(), getYpos());
 
     }*/
+    /*private List<Observer> observers = new ArrayList<>();
+
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    public void notifyObservers() {
+        for (Observer observer: observers) {
+            observer.update();
+        }
+    }*/
+
     private int Direction = 0;
 
     private double Xpos = 0;
@@ -49,7 +67,6 @@ public class Move implements Moveable {
                     break;
 
             }
-
             //updateObservers();
         //}
     }

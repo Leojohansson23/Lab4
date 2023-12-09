@@ -15,7 +15,7 @@ import java.util.Observer;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame /*implements Observable*/ {
+public class CarView extends JFrame  /*implements Observable*/ {
 
     /*@Override
     public void update(Observable o, Object arg) {
@@ -37,13 +37,13 @@ public class CarView extends JFrame /*implements Observable*/ {
         drawPanel.repaint();
     }
 
-    private void updateView(Move move) {
+    /*private void updateView(Move move) {
         int carIndex = carC.cars.indexOf(move);
         int x = (int) Math.round(move.getXpos());
         int y = (int) Math.round(move.getYpos());
         drawPanel.moveit(carIndex,x,y);
         drawPanel.repaint();
-    }
+    }*/
     private static final int X = 800;
     private static final int Y = 850;
 

@@ -1,19 +1,24 @@
+import java.util.List;
+
+
 public class Factory {
 
-    static CarController cc = new CarController();
-    public static void addSaab(){
-
+    public static void addSaab(List<Car> lista){
+        Saab95 saab = new Saab95();
+        lista.add(saab);
     }
 
-    public static void addVolvo(){
+    public static void addVolvo(List<Car> lista){
         Volvo240 volvo = new Volvo240();
-        cc.cars.add(volvo);
-        cc.frame.drawPanel.addVolvoImage();
+        lista.add(volvo);
+
     }
 
-    //public void static addScania(){
+    public static void addScania(List<Car> Lista){
+        Scania scania = new Scania();
+        Lista.add(scania);
+    }
 
-    //}
 }
 
 

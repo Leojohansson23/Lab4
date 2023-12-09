@@ -106,7 +106,7 @@ public class DrawPanel extends JPanel  {
         int yExtend = 0;
         for(int i = 0; i < Images.size(); i++) {
             g.drawImage(Images.get(i), Points.get(i).x, Points.get(i).y + yExtend, null); // see javadoc for more info on the parameters
-            yExtend += 100;
+            yExtend += 60;
         }
     }
 

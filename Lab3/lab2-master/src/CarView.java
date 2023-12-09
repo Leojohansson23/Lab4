@@ -27,6 +27,16 @@ public class CarView extends JFrame /*implements Observable*/ {
         }
     }*/
 
+    public void updateview() {
+        for (Car car : carC.cars) {
+            int x = (int) Math.round(car.move.getXpos());
+            int y = (int) Math.round(car.move.getYpos());
+            drawPanel.moveit(carC.cars.indexOf(car),x, y);
+
+        }
+        drawPanel.repaint();
+    }
+
     private void updateView(Move move) {
         int carIndex = carC.cars.indexOf(move);
         int x = (int) Math.round(move.getXpos());
@@ -34,8 +44,8 @@ public class CarView extends JFrame /*implements Observable*/ {
         drawPanel.moveit(carIndex,x,y);
         drawPanel.repaint();
     }
-    private static final int X = 1200;
-    private static final int Y = 700;
+    private static final int X = 800;
+    private static final int Y = 850;
 
     // The controller member
     CarController carC;

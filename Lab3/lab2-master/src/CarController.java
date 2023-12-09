@@ -26,6 +26,8 @@ public class CarController {
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
 
+    Factory fact = new Factory();
+
 
     public static void main(String[] args) {
 
@@ -62,17 +64,8 @@ public class CarController {
                     car.move.move();
                     }
 
-
-                int x = (int) Math.round(car.move.getXpos());
-                int y = (int) Math.round(car.move.getYpos());
-
-                car.keepInFrame();
-
-                frame.drawPanel.moveit(cars.indexOf(car),x, y);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
             }
-
+            frame.updateview();
         }
     }
 
@@ -122,9 +115,10 @@ public class CarController {
 
     void AddVolvo(){
         if(cars.size() < 10){
-            Volvo240 volvo = new Volvo240();
-            cars.add(volvo);
-            frame.drawPanel.addVolvoImage();
+            fact.addVolvo();
+            //Volvo240 volvo = new Volvo240();
+            //cars.add(volvo);
+            //frame.drawPanel.addVolvoImage();
             //volvo.addObserver(frame);
         }
     }
@@ -151,6 +145,7 @@ public class CarController {
     void RemoveCar(){
         if (cars.size() > 0) {
             frame.drawPanel.removeImage();
+
             cars.remove(cars.size()-1);
 
         }

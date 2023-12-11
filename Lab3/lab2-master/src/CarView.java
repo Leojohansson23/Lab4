@@ -18,6 +18,13 @@ import java.util.Observer;
 
 public class CarView extends JFrame  /*implements Observable*/ {
 
+    private List<Car> cars;
+
+    public CarView(String framename, List<Car> cars){
+        initComponents(framename);
+        this.cars = cars;
+    }
+
     /*@Override
     public void update(Observable o, Object arg) {
         if (o instanceof Move) {
@@ -27,7 +34,6 @@ public class CarView extends JFrame  /*implements Observable*/ {
 
         }
     }*/
-
 
     public void updateview() {
         for (Car car : this.cars) {
@@ -39,16 +45,8 @@ public class CarView extends JFrame  /*implements Observable*/ {
         drawPanel.repaint();
     }
 
-    /*private void updateView(Move move) {
-        int carIndex = carC.cars.indexOf(move);
-        int x = (int) Math.round(move.getXpos());
-        int y = (int) Math.round(move.getYpos());
-        drawPanel.moveit(carIndex,x,y);
-        drawPanel.repaint();
-    }*/
     private static final int X = 800;
     private static final int Y = 850;
-
 
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
@@ -60,33 +58,39 @@ public class CarView extends JFrame  /*implements Observable*/ {
     JLabel gasLabel = new JLabel("Amount of gas");
 
     private JButton gasButton = new JButton("Gas");
-     JButton brakeButton = new JButton("Brake");
-     JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
+    private JButton brakeButton = new JButton("Brake");
+    private JButton turboOnButton = new JButton("Saab Turbo on");
+    private JButton turboOffButton = new JButton("Saab Turbo off");
+    private JButton liftBedButton = new JButton("Scania Lift Bed");
+    private JButton lowerBedButton = new JButton("Lower Lift Bed");
 
-    JButton AddVolvoButton = new JButton("Add Volvo");
-    JButton AddSaabButton = new JButton("Add Saab");
+    private   JButton addVolvoButton = new JButton("Add Volvo");
+    private JButton addSaabButton = new JButton("Add Saab");
 
-    JButton AddScaniaButton = new JButton("Add Scania");
+    private JButton addScaniaButton = new JButton("Add Scania");
 
-    JButton RemoveCarButton = new JButton("Remove Car");
+    private JButton removeCarButton = new JButton("Remove Car");
 
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
+    private JButton startButton = new JButton("Start all cars");
+    private JButton stopButton = new JButton("Stop all cars");
 
-    private List<Car> cars;
 
     public void addGasButtonListener(ActionListener listener) {
         gasButton.addActionListener(listener);
     }
+    public void addBreakButtonListener(ActionListener listener) {brakeButton.addActionListener(listener);}
+    public void addturboOnButtonListener(ActionListener listener) {turboOnButton.addActionListener(listener);}
+    public void addturboOffButtonListener(ActionListener listener) {turboOffButton.addActionListener(listener);}
+    public void addHigherliftBedButtonListener(ActionListener listener) {liftBedButton.addActionListener(listener);}
+    public void addLowerLiftBedButtonListener(ActionListener listener) {lowerBedButton.addActionListener(listener);}
+    public void addVolvoButtonListener(ActionListener listener) {addVolvoButton.addActionListener(listener);}
+    public void addSaabButtonListener(ActionListener listener) {addSaabButton.addActionListener(listener);}
+    public void addScaniaButtonListener(ActionListener listener) {addScaniaButton.addActionListener(listener);}
+    public void addremoveCarButtonListener(ActionListener listener){removeCarButton.addActionListener(listener);}
+    public void addstartButtonListener(ActionListener listener){startButton.addActionListener(listener);}
+    public void addstopButtonListener(ActionListener listener){stopButton.addActionListener(listener);}
 
     // Constructor
-    public CarView(String framename, List<Car> cars){
-        initComponents(framename);
-        this.cars = cars;
-    }
 
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
@@ -97,7 +101,6 @@ public class CarView extends JFrame  /*implements Observable*/ {
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
 
 
         SpinnerModel spinnerModel =
@@ -126,28 +129,23 @@ public class CarView extends JFrame  /*implements Observable*/ {
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
-        controlPanel.add(AddVolvoButton,6);
-        controlPanel.add(AddSaabButton,7);
-        controlPanel.add(AddScaniaButton,8);
-        controlPanel.add(RemoveCarButton,9);
+        controlPanel.add(addVolvoButton,6);
+        controlPanel.add(addSaabButton,7);
+        controlPanel.add(addScaniaButton,8);
+        controlPanel.add(removeCarButton,9);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
-
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
         startButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(startButton);
 
-
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
-
-
-
 
 
         // Make the frame pack all it's components by respecting the sizes if possible.
@@ -162,7 +160,5 @@ public class CarView extends JFrame  /*implements Observable*/ {
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-
 }
 

@@ -30,42 +30,32 @@ public abstract class Car {
     public Color getColor() {
         return color;
     }
-
     public String getModelName() {
         return modelName;
     }
-
     public void setColor(Color clr) {
         color = clr;
     }
-
     public int getNrDoors() {
         return nrDoors;
     }
-
     public double setEnginePower(double power) {
         return this.enginePower = power;
     }
-
     public double getEnginePower() {
         return enginePower;
     }
-
     public void startEngine() {
         move.setCurrentSpeed(0.1);
     }
-
     public void stopEngine() {
         move.setCurrentSpeed(0);
     }
-
     public boolean turboOn;
     private double trimFactor;
-
     public double setTrimFactor(double trim) {
         return this.trimFactor = trim;
     }
-
     public double getTrimFactor() {
         return trimFactor;
     }

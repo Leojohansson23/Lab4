@@ -40,10 +40,7 @@ public class CarWorld {
         cw.cars.add(new Saab95());
         cw.cars.add(new Scania());
         cw.frame = new CarView("CarSim 1.0",cw.cars);
-        cw.CarC = new CarController(cw.frame, cw.cars, cw);
-
-        //Saab95CarController.frame = new CarView("CarSim 1.0",Saab95CarController);
-        //Saab95CarController.timer.start();
+        cw.CarC = new CarController(cw.frame, cw);
 
         // Start a new view and send a reference of self
 

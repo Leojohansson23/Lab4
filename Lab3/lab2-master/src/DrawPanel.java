@@ -19,11 +19,10 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
 
     // Just a single image, TODO: Generalize
     ArrayList<Image> Images = new ArrayList();
+    Factory fact = new Factory();
 
     //BufferedImage Image;
     // To keep track of a singel cars position
-
-
 
     void addVolvoImage() {
         try {
@@ -31,8 +30,6 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        Point pointx = new Point();
-        Car.Points.add(pointx);
     }
 
     void addSaabImage() {
@@ -41,9 +38,6 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
         }catch (IOException ex) {
             ex.printStackTrace();
         }
-        Point pointx = new Point();
-        Car.Points.add(pointx);
-
     }
 
     void addScaniaImage() {
@@ -53,18 +47,12 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
         }catch (IOException ex) {
             ex.printStackTrace();
         }
-        Point pointx = new Point();
-        Car.Points.add(pointx);
     }
 
     void removeImage(){
         Images.remove(Images.size()-1);
         Car.Points.remove(Car.Points.size() - 1);
     }
-    Point point0 = new Point();
-    Point point1 = new Point();
-    Point point2 = new Point();
-
 
     // TODO: Make this genereal for all cars
     void moveit(int i, int x, int y){
@@ -78,6 +66,7 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
         // Print an error message in case file is not found with a try/catch block
+
         try {
             // You can remove the "pics" part if running outside of IntelliJ and
             // everything is in the same main folder.
@@ -85,17 +74,20 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
+
             Images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
             Images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
             Images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
-            Car.Points.add(point0);
-            Car.Points.add(point1);
-            Car.Points.add(point2);
+            fact.addVolvo();
+            fact.addSaab();
+            fact.addScania();
+
 
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }
+
 
     }
 

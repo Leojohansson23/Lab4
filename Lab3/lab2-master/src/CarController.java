@@ -18,48 +18,39 @@ public class CarController {
 // This actionListener is for the gas button only
     CarWorld carworld;
     CarView frame;
-    private List<Car> cars;
 
 
-    public CarController(CarView view, ArrayList<Car> listofcars, CarWorld carworld) {
+    public CarController(CarView view, CarWorld carworld) {
         this.frame = view;
-        this.cars = listofcars;
         this.carworld = carworld;
         initListeners();
     }
 
     private void initListeners(){
         // TODO: Create more for each component as necessary
-        frame.gasButton.addActionListener(new ActionListener() {
+        //frame.gasButton.addActionListener(new ActionListener() {
+        frame.addGasButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 carworld.gas(frame.gasAmount);
-
-                System.out.println("Hej");
-               // }
-
             }
-
         });
 
-
-
-        frame.brakeButton.addActionListener(new ActionListener() {
+        frame.addBreakButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carworld.brake(frame.gasAmount);
             }
         });
 
-
-        frame.turboOnButton.addActionListener(new ActionListener() {
+        frame.addturboOnButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carworld.turboON();
             }
         });
-        frame.turboOffButton.addActionListener(new ActionListener() {
+
+        frame.addturboOffButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carworld.turboOff();
@@ -67,43 +58,43 @@ public class CarController {
             }
         });
 
-        frame.AddVolvoButton.addActionListener(new ActionListener() {
+        frame.addVolvoButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carworld.AddVolvo();
             }
         });
 
-        frame.AddSaabButton.addActionListener(new ActionListener() {
+        frame.addSaabButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carworld.AddSaab();
             }
         });
 
-        frame.AddScaniaButton.addActionListener(new ActionListener() {
+        frame.addScaniaButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carworld.AddScania();
             }
         });
 
-        frame.RemoveCarButton.addActionListener(new ActionListener() {
+        frame.addremoveCarButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carworld.RemoveCar();
             }
         });
 
-
-        frame.liftBedButton.addActionListener(new ActionListener() {
+        frame.addHigherliftBedButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carworld.higherBed();
 
             }
         });
-        frame.lowerBedButton.addActionListener(new ActionListener() {
+
+        frame.addLowerLiftBedButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carworld.lowerBed();
@@ -111,19 +102,18 @@ public class CarController {
             }
         });
 
-        frame.startButton.addActionListener(new ActionListener() {
+        frame.addstartButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carworld.startAllCars();
             }
         });
 
-
-    frame.stopButton.addActionListener(new ActionListener() {
+        frame.addstopButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carworld.stopAllCars();
-            }
+                    carworld.stopAllCars();
+                }
         });
     }
 }

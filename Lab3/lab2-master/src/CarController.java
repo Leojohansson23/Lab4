@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class CarController {
 
-    //private T Car;
+    //privafte T Car;
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -117,16 +117,15 @@ public class CarController {
 
     void AddVolvo(){
         if(cars.size() < 10){
-            fact.addVolvo(cars);
+            cars.add(fact.addVolvo());
             frame.drawPanel.addVolvoImage();
-
             //volvo.addObserver(frame);
         }
     }
 
     void AddSaab(){
         if(cars.size() < 10){
-            fact.addSaab(cars);
+            cars.add(fact.addSaab());
             frame.drawPanel.addSaabImage();
             //saab.addObserver(frame);
         }
@@ -134,7 +133,7 @@ public class CarController {
 
     void AddScania(){
         if(cars.size() < 10){
-            fact.addScania(cars);
+            cars.add(fact.addScania());
             frame.drawPanel.addScaniaImage();
             //scania.addObserver(frame);
         }

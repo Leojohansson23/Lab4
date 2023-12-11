@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.List;
 
-public class Move implements Moveable {
+public class Move implements Moveable  {
 
     /*private void updateObservers() {
         Observable.setChanged(true);
@@ -18,12 +17,7 @@ public class Move implements Moveable {
     public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
-
-    public void notifyObservers() {
-        for (Observer observer: observers) {
-            observer.update();
-        }
-    }*/
+    */
 
     private int Direction = 0;
 
@@ -40,7 +34,12 @@ public class Move implements Moveable {
     public int setDirection(int direction) {return this.Direction = direction;}
 
 
-
+    /*static Observer observer = new Observer() {
+        @Override
+        public double update(double x, double y) {
+            return observer.super.update(x, y);
+       }
+    };*/
 
     public double getCurrentSpeed(){
         return currentSpeed;
@@ -49,7 +48,6 @@ public class Move implements Moveable {
 
     @Override
         public void move() {
-        //if (getCanMove()) {
             int value = (Direction % 360);
             value = value / 90;
             switch (value) {
@@ -67,8 +65,7 @@ public class Move implements Moveable {
                     break;
 
             }
-            //updateObservers();
-        //}
+
     }
 
 

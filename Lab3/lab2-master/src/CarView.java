@@ -59,7 +59,7 @@ public class CarView extends JFrame  /*implements Observable*/ {
     int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
-     JButton gasButton = new JButton("Gas");
+    private JButton gasButton = new JButton("Gas");
      JButton brakeButton = new JButton("Brake");
      JButton turboOnButton = new JButton("Saab Turbo on");
     JButton turboOffButton = new JButton("Saab Turbo off");

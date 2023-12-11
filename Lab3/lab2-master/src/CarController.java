@@ -16,14 +16,15 @@ public class CarController {
 
 
 // This actionListener is for the gas button only
-    CarWorld carworld = new CarWorld();
+    CarWorld carworld;
     CarView frame;
     private List<Car> cars;
 
 
-    public CarController(CarView view, ArrayList<Car> listofcars) {
+    public CarController(CarView view, ArrayList<Car> listofcars, CarWorld carworld) {
         this.frame = view;
         this.cars = listofcars;
+        this.carworld = carworld;
         initListeners();
     }
 
@@ -32,13 +33,11 @@ public class CarController {
         frame.gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (Car car: cars) {
-                    car.gas(frame.gasAmount);
-                    System.out.print(frame.gasAmount);
-                    //System.out.println(car.move.getCurrentSpeed());
 
-                    System.out.println("Hej");
-                }
+                carworld.gas(frame.gasAmount);
+
+                System.out.println("Hej");
+               // }
 
             }
 

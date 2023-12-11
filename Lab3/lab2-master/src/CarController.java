@@ -3,8 +3,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
+
 * This class represents the Controller part in the MVC pattern.
 * It's responsibilities is to listen to the View and responds in a appropriate manner by
 * modifying the model state and the updating the view.
@@ -12,196 +14,118 @@ import java.util.ArrayList;
 
 public class CarController {
 
-    //privafte T Car;
-    // member fields:
 
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with an listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
-
-    // The frame that represents this instance View of the MVC pattern
+// This actionListener is for the gas button only
+    CarWorld carworld = new CarWorld();
     CarView frame;
-    // A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
-
-    Factory fact = new Factory();
+    private List<Car> cars;
 
 
-    public static void main(String[] args) {
-
-        // Instance of this class
-        CarController cc = new CarController();
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Saab95());
-        cc.cars.add(new Scania());
-
-        //Saab95CarController.frame = new CarView("CarSim 1.0",Saab95CarController);
-        //Saab95CarController.timer.start();
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0",cc);
-
-        // Start the timer
-        cc.timer.start();
+    public CarController(CarView view, ArrayList<Car> listofcars) {
+        this.frame = view;
+        this.cars = listofcars;
+        initListeners();
     }
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
-                if (car instanceof Scania) {
-                    if (((Scania) car).scaniacarrier.getCanMove())
-                        car.move.move();
-                } else if (car instanceof Cartransport) {
-                    if (((Cartransport) car).Cartransportcarrier.getCarrierpos()) {
-                        car.move.move();
-                    }
-                } else {
-                    car.move.move();
-                    }
+    private void initListeners(){
+        // TODO: Create more for each component as necessary
+        frame.gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (Car car: cars) {
+                    car.gas(frame.gasAmount);
+                    System.out.print(frame.gasAmount);
+                    //System.out.println(car.move.getCurrentSpeed());
 
-                car.keepInFrame();
-
-            }
-            frame.updateview();
-        }
-    }
-
-    // Calls the gas method for each car once
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Car car : cars) {
-            if (car instanceof Scania) {
-                if (((Scania) car).scaniacarrier.getCanMove()) {
-                    car.gas(gas);
+                    System.out.println("Hej");
                 }
-            }
-            else if (car instanceof Cartransport) {
-                if (((Cartransport) car).Cartransportcarrier.getCarrierpos()) {
-                    car.gas(gas);
-                }
-            } else {
-                car.gas(gas);
-            }
-
-        }
-    }
-
-    void brake(int amount) {
-        double brake = ((double) amount) / 100;
-        for (Car car: cars) {
-            car.brake(brake);
-
-        }
-    }
-
-    void turboON(){
-        for (Car car: cars) {
-            if(car instanceof Saab95) {
-                ((Saab95) car).setTurboOn();
 
             }
-        }
-    }
-    void turboOff(){
-        for (Car car: cars) {
-            if(car instanceof Saab95) {
-                ((Saab95) car).setTurboOff();
+
+        });
+
+
+
+        frame.brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.brake(frame.gasAmount);
             }
-        }
-    }
-
-    void AddVolvo(){
-        if(cars.size() < 10){
-            cars.add(fact.addVolvo());
-            frame.drawPanel.addVolvoImage();
-            //volvo.addObserver(frame);
-        }
-    }
-
-    void AddSaab(){
-        if(cars.size() < 10){
-            cars.add(fact.addSaab());
-            frame.drawPanel.addSaabImage();
-            //saab.addObserver(frame);
-        }
-    }
-
-    void AddScania(){
-        if(cars.size() < 10){
-            cars.add(fact.addScania());
-            frame.drawPanel.addScaniaImage();
-            //scania.addObserver(frame);
-        }
-    }
+        });
 
 
-    void RemoveCar(){
-        if (cars.size() > 0) {
-            frame.drawPanel.removeImage();
-
-            cars.remove(cars.size()-1);
-
-        }
-
-    }
-
-
-    void lowerBed(){
-        for (Car car: cars) {
-            if(car instanceof Scania)
-            {
-                ((Scania) car).CarrierLower();
+        frame.turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.turboON();
             }
-        }
-    }
+        });
+        frame.turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.turboOff();
 
-
-    void higherBed(){
-        for (Car car: cars) {
-            if(car instanceof Scania)
-            {
-
-                ((Scania) car).CarrierHigher();
             }
-        }
+        });
 
-
-    }
-
-    void stopAllCars(){
-        for (Car car: cars){
-            while (car.move.getCurrentSpeed() > 0){
-                car.brake(1);
+        frame.AddVolvoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.AddVolvo();
             }
-        }
-    }
+        });
 
-    void startAllCars() {
-        for (Car car : cars) {
-            if (car instanceof Scania) {
-                if (((Scania) car).scaniacarrier.getCanMove()) {
-                    while (car.move.getCurrentSpeed() < 0.1) {
-                        car.gas(0.5);
-                    }
-                }
-            } else if (car instanceof Cartransport) {
-                if (((Cartransport) car).Cartransportcarrier.getCarrierpos()) {
-                    while (car.move.getCurrentSpeed() < 0.1) {
-                        car.gas(0.5);
-
-                    }
-                }
-            } else {
-                while (car.move.getCurrentSpeed() < 0.1) {
-                    car.gas(0.5);
-                }
+        frame.AddSaabButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.AddSaab();
             }
-        }
+        });
+
+        frame.AddScaniaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.AddScania();
+            }
+        });
+
+        frame.RemoveCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.RemoveCar();
+            }
+        });
+
+
+        frame.liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.higherBed();
+
+            }
+        });
+        frame.lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.lowerBed();
+
+            }
+        });
+
+        frame.startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.startAllCars();
+            }
+        });
+
+
+    frame.stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carworld.stopAllCars();
+            }
+        });
     }
 }
 

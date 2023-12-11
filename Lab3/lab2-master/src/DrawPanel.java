@@ -23,7 +23,7 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
     //BufferedImage Image;
     // To keep track of a singel cars position
 
-    ArrayList<Point> Points = new ArrayList<>();
+
 
     void addVolvoImage() {
         try {
@@ -32,7 +32,7 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
             ex.printStackTrace();
         }
         Point pointx = new Point();
-        Points.add(pointx);
+        Car.Points.add(pointx);
     }
 
     void addSaabImage() {
@@ -42,7 +42,7 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
             ex.printStackTrace();
         }
         Point pointx = new Point();
-        Points.add(pointx);
+        Car.Points.add(pointx);
 
     }
 
@@ -54,24 +54,22 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
             ex.printStackTrace();
         }
         Point pointx = new Point();
-        Points.add(pointx);
+        Car.Points.add(pointx);
     }
 
     void removeImage(){
         Images.remove(Images.size()-1);
-        Points.remove(Points.size() - 1);
+        Car.Points.remove(Car.Points.size() - 1);
     }
     Point point0 = new Point();
     Point point1 = new Point();
     Point point2 = new Point();
 
 
-
-
     // TODO: Make this genereal for all cars
     void moveit(int i, int x, int y){
-        Points.get(i).x = x;
-        Points.get(i).y = y;
+        Car.Points.get(i).x = x;
+        Car.Points.get(i).y = y;
     }
 
     // Initializes the panel and reads the images
@@ -90,9 +88,9 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
             Images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
             Images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
             Images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
-            Points.add(point0);
-            Points.add(point1);
-            Points.add(point2);
+            Car.Points.add(point0);
+            Car.Points.add(point1);
+            Car.Points.add(point2);
 
         } catch (IOException ex)
         {
@@ -108,10 +106,9 @@ public class DrawPanel extends JPanel /*implements Observer*/ {
         super.paintComponent(g);
         int yExtend = 0;
         for(int i = 0; i < Images.size(); i++) {
-            g.drawImage(Images.get(i), Points.get(i).x, Points.get(i).y + yExtend, null); // see javadoc for more info on the parameters
+            g.drawImage(Images.get(i), Car.Points.get(i).x, Car.Points.get(i).y + yExtend, null); // see javadoc for more info on the parameters
             yExtend += 60;
         }
     }
-
 
 }

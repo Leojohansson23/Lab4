@@ -1,6 +1,7 @@
 
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,6 +16,8 @@ public abstract class Car {
         this.modelName = modelName;
 
     }
+
+    static ArrayList<Point> Points = new ArrayList<>();
 
     Move move = new Move();
     private boolean onTruck = false;

@@ -71,7 +71,7 @@ public class CarWorld {
 
         }
     }
-    // Calls the gas method for each car once
+    // Calls the agas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Car car : cars) {
@@ -115,22 +115,29 @@ public class CarWorld {
 
     void AddVolvo(){
         if(cars.size() < 10){
-            cars.add(fact.addVolvo());
+            Volvo240 newvolvo = fact.addVolvo();
+            cars.add(newvolvo);
             frame.drawPanel.addVolvoImage();
+            newvolvo.move.addObserver(frame);
+
         }
     }
 
     void AddSaab(){
         if(cars.size() < 10){
-            cars.add(fact.addSaab());
+            Saab95 newsaab = fact.addSaab();
+            cars.add(newsaab);
             frame.drawPanel.addSaabImage();
+            newsaab.move.addObserver(frame);
         }
     }
 
     void AddScania(){
         if(cars.size() < 10){
-            cars.add(fact.addScania());
+            Scania newscania = fact.addScania();
+            cars.add(newscania);
             frame.drawPanel.addScaniaImage();
+            newscania.move.addObserver(frame);
         }
     }
 
@@ -139,7 +146,9 @@ public class CarWorld {
         if (cars.size() > 0) {
             frame.drawPanel.removeImage();
             cars.remove(cars.size()-1);
+
             frame.repaint();
+
         }
     }
 

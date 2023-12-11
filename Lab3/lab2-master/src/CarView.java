@@ -26,11 +26,10 @@ public class CarView extends JFrame implements Observer {
     public CarView(String framename, List<Car> cars){
         initComponents(framename);
         this.cars = cars;
-        for (Car car: cars) {
+        for(Car car: cars) {
             car.move.addObserver(this);
         }
     }
-
 
     public void updateview() {
         for (Car car : this.cars) {

@@ -5,20 +5,20 @@ import java.util.List;
 
 public class Factory extends JPanel {
 
-    public static Car addSaab(){
+    public Saab95 addSaab(){
         Point pointx = new Point();
         Car.Points.add(pointx);
         return new Saab95();
     }
 
-    public static Car addVolvo(){
+    public Volvo240 addVolvo(){
         Point pointx = new Point();
         Car.Points.add(pointx);
         return new Volvo240();
 
     }
 
-    public static Car addScania(){
+    public Scania addScania(){
         Point pointx = new Point();
         Car.Points.add(pointx);
         return new Scania();

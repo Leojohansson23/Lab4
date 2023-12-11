@@ -14,11 +14,8 @@ import java.util.List;
 
 public class CarController {
 
-
-// This actionListener is for the gas button only
     CarWorld carworld;
     CarView frame;
-
 
     public CarController(CarView view, CarWorld carworld) {
         this.frame = view;
@@ -27,8 +24,8 @@ public class CarController {
     }
 
     private void initListeners(){
+
         // TODO: Create more for each component as necessary
-        //frame.gasButton.addActionListener(new ActionListener() {
         frame.addGasButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

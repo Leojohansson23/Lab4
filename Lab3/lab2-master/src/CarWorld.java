@@ -69,8 +69,6 @@ public class CarWorld {
 
             }
 
-            frame.updateview();
-
         }
     }
     // Calls the gas method for each car once
@@ -89,7 +87,6 @@ public class CarWorld {
             } else {
                 car.gas(gas);
             }
-
         }
     }
 
@@ -97,7 +94,6 @@ public class CarWorld {
         double brake = ((double) amount) / 100;
         for (Car car: cars) {
             car.brake(brake);
-
         }
     }
 
@@ -121,7 +117,6 @@ public class CarWorld {
         if(cars.size() < 10){
             cars.add(fact.addVolvo());
             frame.drawPanel.addVolvoImage();
-            //volvo.addObserver(frame);
         }
     }
 
@@ -129,7 +124,6 @@ public class CarWorld {
         if(cars.size() < 10){
             cars.add(fact.addSaab());
             frame.drawPanel.addSaabImage();
-            //saab.addObserver(frame);
         }
     }
 
@@ -137,7 +131,6 @@ public class CarWorld {
         if(cars.size() < 10){
             cars.add(fact.addScania());
             frame.drawPanel.addScaniaImage();
-            //scania.addObserver(frame);
         }
     }
 
@@ -145,11 +138,9 @@ public class CarWorld {
     void RemoveCar(){
         if (cars.size() > 0) {
             frame.drawPanel.removeImage();
-
             cars.remove(cars.size()-1);
-
+            frame.repaint();
         }
-
     }
 
 
@@ -171,8 +162,6 @@ public class CarWorld {
                 ((Scania) car).CarrierHigher();
             }
         }
-
-
     }
 
     void stopAllCars(){

@@ -5,8 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -16,24 +14,23 @@ import java.util.Observer;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame  /*implements Observable*/ {
+public class CarView extends JFrame implements Observer {
 
     private List<Car> cars;
+
+    @Override
+    public void update() {
+        updateview();
+    }
 
     public CarView(String framename, List<Car> cars){
         initComponents(framename);
         this.cars = cars;
+        for (Car car: cars) {
+            car.move.addObserver(this);
+        }
     }
 
-    /*@Override
-    public void update(Observable o, Object arg) {
-        if (o instanceof Move) {
-            Move move = (Move) o;
-            System.out.println("Hejsan");
-            updateView(move);
-
-        }
-    }*/
 
     public void updateview() {
         for (Car car : this.cars) {
@@ -160,5 +157,6 @@ public class CarView extends JFrame  /*implements Observable*/ {
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
 }
 

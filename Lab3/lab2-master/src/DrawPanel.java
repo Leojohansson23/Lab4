@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class DrawPanel extends JPanel  {
 
 
-
     // Just a single image, TODO: Generalize
     ArrayList<Image> Images = new ArrayList();
     Factory fact = new Factory();
@@ -50,9 +49,10 @@ public class DrawPanel extends JPanel  {
     }
 
     // TODO: Make this genereal for all cars
-    void moveit(int i, int x, int y){
-        Car.Points.get(i).x = x;
-        Car.Points.get(i).y = y;
+    void moveit(int i, int  x, int y){
+        Car.Points.get(i).x =  x;
+        Car.Points.get(i).y =  y;
+
     }
 
     // Initializes the panel and reads the images
